@@ -15,6 +15,8 @@ import android.widget.RelativeLayout;
 import androidx.annotation.Nullable;
 
 import java.util.Calendar;
+import java.util.Currency;
+import java.util.Locale;
 
 public class QwertyKeyboard extends LinearLayout {
 
@@ -27,6 +29,7 @@ public class QwertyKeyboard extends LinearLayout {
     private float textSize;
     private Context mContext;
     private boolean isUpperCase = false;
+    private boolean isNumeric = false;
 
 
     public QwertyKeyboard(Context context) {
@@ -65,13 +68,94 @@ public class QwertyKeyboard extends LinearLayout {
         this.setWeightSum(4);
         this.setBackgroundColor(Color.TRANSPARENT);
 
-        designAlphabets();
+        if (isNumeric) {
+            designNumbers();
+        } else {
+            designAlphabets();
+        }
 
 
         this.addView(row1);
         this.addView(row2);
         this.addView(row3);
         this.addView(row4);
+    }
+
+    private void designNumbers() {
+        row1 = new LinearLayout(mContext);
+        row1.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1, 1F));
+        row1.setWeightSum(10);
+
+        String[] alphabets = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+
+        for (int i = 0; i < alphabets.length; i++) {
+            KeysButton btn;
+            btn = designButton(alphabets[i], 1F);
+            row1.addView(btn);
+        }
+
+
+
+        row2 = new LinearLayout(mContext);
+        row2.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1, 1F));
+        row2.setWeightSum(10);
+
+        Currency currency = Currency.getInstance(Locale.getDefault());
+        String[] alphabets2 = new String[]{"@", "#", currency.getSymbol(), "_", "&", "-", "+", "(", ")", "/"};
+
+        for (int i = 0; i < alphabets2.length; i++) {
+            KeysButton btn;
+            btn = designButton(alphabets2[i], 1F);
+            row2.addView(btn);
+        }
+
+
+
+        row3 = new LinearLayout(mContext);
+        row3.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1, 1F));
+        row3.setWeightSum(10);
+
+        String[] alphabets3 = new String[]{"{", "*", Html.fromHtml("&quot;").toString(), "'", ":", ";", "!", "?", "%", "}"};
+
+        for (int i = 0; i < alphabets3.length; i++) {
+            KeysButton btn;
+            if(isUpperCase) {
+                btn = designButton(alphabets3[i].toUpperCase(), 1F);
+            } else {
+                btn = designButton(alphabets3[i], 1F);
+            }
+            row3.addView(btn);
+        }
+
+
+
+
+        row4 = new LinearLayout(mContext);
+        row4.setBackgroundColor(cellColor);
+        row4.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1, 1F));
+        row4.setWeightSum(10);
+
+        String[] alphabets4 = new String[]{"ABC", "space", "⇐"};
+
+        for (int i = 0; i < alphabets4.length; i++) {
+            float weight = 1;
+            if (i == 0) {
+                weight = 1.5F;
+            }
+            else if (i == 1) {
+                weight = 7.5F;
+            }
+            else if (i == 2) {
+                weight = 1F;
+            }
+            KeysButton btn;
+            if(isUpperCase) {
+                btn = designButton(alphabets4[i].toUpperCase(), weight);
+            } else {
+                btn = designButton(alphabets4[i], weight);
+            }
+            row4.addView(btn);
+        }
     }
 
     private void designAlphabets() {
@@ -135,7 +219,7 @@ public class QwertyKeyboard extends LinearLayout {
         row4.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1, 1F));
         row4.setWeightSum(10);
 
-        String[] alphabets4 = new String[]{"?123", "space", "⇐"};
+        String[] alphabets4 = new String[]{"123", "space", "⇐"};
 
         for (int i = 0; i < alphabets4.length; i++) {
             float weight = 1;
@@ -161,7 +245,7 @@ public class QwertyKeyboard extends LinearLayout {
     private KeysButton designButton(String text, float weight) {
         KeysButton button = new KeysButton(mContext);
         if (text.equalsIgnoreCase("space")) {
-            LinearLayout.LayoutParams gParams = new LinearLayout.LayoutParams(1, (int)(textSize * 2.5), weight);
+            LinearLayout.LayoutParams gParams = new LinearLayout.LayoutParams(1, (int)(textSize + DroidFunctions.dpToPx(15)), weight);
             gParams.gravity = Gravity.CENTER_VERTICAL;
             button.setLayoutParams(gParams);
             button.setBgColor(Color.TRANSPARENT);
@@ -222,7 +306,15 @@ public class QwertyKeyboard extends LinearLayout {
                     long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
                     if(clickDuration < MAX_CLICK_DURATION) {
                         if (event != null) {
-                            if (view.getTag().toString().equalsIgnoreCase("▲")) {
+                            if (view.getTag().toString().equalsIgnoreCase("123")) {
+                                isNumeric = true;
+                                invalidateComponent();
+                            }
+                            else if (view.getTag().toString().equalsIgnoreCase("ABC")) {
+                                isNumeric = false;
+                                invalidateComponent();
+                            }
+                            else if (view.getTag().toString().equalsIgnoreCase("▲")) {
                                 if(isUpperCase) {
                                     isUpperCase = false;
                                 } else {
@@ -230,7 +322,15 @@ public class QwertyKeyboard extends LinearLayout {
                                 }
                                 invalidateComponent();
                             } else {
-                                event.onKeyClicked(view.getTag().toString());
+                                if (view.getTag().toString().equalsIgnoreCase("↵")) {
+                                    event.onKeyClicked("ENTER");
+                                }
+                                else if (view.getTag().toString().equalsIgnoreCase("⇐")) {
+                                    event.onKeyClicked("DELETE");
+                                }
+                                else {
+                                    event.onKeyClicked(view.getTag().toString());
+                                }
                             }
                         }
                     }
