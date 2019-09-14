@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="NumericKeyboard">
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="pressedTextColor" format="color" />
+        <attr name="textStyle" format="integer" >
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
+        <attr name="cellColor" format="color" />
+        <attr name="pressedCellColor" format="color" />
+        <attr name="dividerColor" format="color" />
+        <attr name="fontName" format="string" />
+    </declare-styleable>
+
+
+    <declare-styleable name="UIButton">
+        <!--Common-->
+        <attr name="backgroundColor" format="color" />
+        <attr name="text" format="string" />
+        <attr name="textSize" />
+        <attr name="textColor" />
+        <attr name="textStyle"/>
+        <attr name="fontName" />
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="cornerRadius" format="dimension" />
+        <attr name="icon" format="reference" />
+        <attr name="iconShape" format="integer">
+            <enum name="normal" value="1" />
+            <enum name="circular" value="2" />
+        </attr>
+        <attr name="iconWidth" format="dimension" />
+        <attr name="iconHeight" format="dimension" />
+        <attr name="spacing" format="dimension" />
+        <!--BUTTON-->
+        <attr name="pressedBackgroundColor" format="color" />
+        <attr name="pressedTextColor" />
+        <attr name="pressedIcon" format="reference" />
+        <attr name="iconPosition" format="integer">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="top" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+        <attr name="gravity" format="integer">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="center" value="3" />
+        </attr>
+
+        <attr name="buttonShape" format="integer">
+            <enum name="rectangle" value="1" />
+            <enum name="oval" value="2" />
+        </attr>
+    </declare-styleable>
+
+</resources>
