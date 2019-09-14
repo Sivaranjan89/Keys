@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.droid.keys.NumericKeyboard
+    <com.droid.keys.QwertyKeyboard
         android:id="@+id/keyboard"
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -17,7 +17,6 @@
         app:pressedTextColor="#FFFFFF"
         app:pressedCellColor="#000000"
         app:textStyle="bold"
-        app:textSize="20dp"
-        app:dividerColor="@color/colorAccent"/>
+        app:textSize="20dp"/>
 
 </RelativeLayout>

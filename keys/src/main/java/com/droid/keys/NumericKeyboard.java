@@ -193,4 +193,69 @@ public class NumericKeyboard extends LinearLayout {
     public KeysClickEvent getKeyClickEvent() {
         return this.event;
     }
+
+    public void setTextSize(float textSizeInDp) {
+        textSizeInDp = DroidFunctions.dpToPx(textSizeInDp);
+        this.textSize = textSizeInDp;
+    }
+
+    public float getTextSize() {
+        return textSize;
+    }
+
+    public void setTextColor(int textColor) {
+        this.textColor = textColor;
+    }
+
+    public int getTextColor() {
+        return textColor;
+    }
+
+    public void setTextStyle(int textStyle) {
+        this.textStyle = textStyle;
+    }
+
+    public int getTextStyle() {
+        return textStyle;
+    }
+
+    public void setFontName(String fontName) {
+        this.fontName = fontName;
+    }
+
+    public String getFontName() {
+        return fontName;
+    }
+
+    public void setPressedTextColor(int pressedTextColor) {
+        this.pressedTextColor = pressedTextColor;
+    }
+
+    public int getPressedTextColor() {
+        return pressedTextColor;
+    }
+
+    public void setCellColor(int cellColor) {
+        this.cellColor = cellColor;
+    }
+
+    public int getCellColor() {
+        return cellColor;
+    }
+
+    public void setDividerColor(int dividerColor) {
+        this.dividerColor = dividerColor;
+    }
+
+    public int getDividerColor() {
+        return dividerColor;
+    }
+
+    public void setPressedCellColor(int pressedCellColor) {
+        this.pressedCellColor = pressedCellColor;
+    }
+
+    public int getPressedCellColor() {
+        return pressedCellColor;
+    }
 }

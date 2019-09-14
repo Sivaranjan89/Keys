@@ -70,6 +70,7 @@ class KeysButton extends RelativeLayout {
     private int pressedBackgroundColor;
     private float spacing;
     private int buttonShape;
+    private boolean centered;
 
     public KeysButton(Context context) {
         super(context);
@@ -273,6 +274,7 @@ class KeysButton extends RelativeLayout {
         tv.setTypeface(tf, textStyle);
         tv.setTextColor(textColor);
         tv.setLayoutParams(txParams);
+        tv.setGravity(Gravity.CENTER_VERTICAL);
     }
 
     private void generateSpace(LinearLayout parentLayout) {
@@ -356,6 +358,10 @@ class KeysButton extends RelativeLayout {
 
 
     //Setters and Getters
+    public void setCentered(boolean centered) {
+        this.centered = centered;
+        drawButton();
+    }
     public void setText(String text) {
         this.text = text;
         drawButton();
