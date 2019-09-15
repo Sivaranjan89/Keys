@@ -258,4 +258,13 @@ public class NumericKeyboard extends LinearLayout {
     public int getPressedCellColor() {
         return pressedCellColor;
     }
+
+    public void hideKeyboard() {
+        this.setVisibility(View.GONE);
+    }
+
+    public void showKeyboard() {
+        this.setVisibility(View.VISIBLE);
+        invalidateComponent();
+    }
 }

@@ -424,4 +424,15 @@ public class QwertyKeyboard extends LinearLayout {
     public int getPressedCellColor() {
         return pressedCellColor;
     }
+
+    public void hideKeyboard() {
+        this.setVisibility(View.GONE);
+        isNumeric = false;
+        isUpperCase = false;
+    }
+
+    public void showKeyboard() {
+        this.setVisibility(View.VISIBLE);
+        invalidateComponent();
+    }
 }
